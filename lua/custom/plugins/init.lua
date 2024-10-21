@@ -27,4 +27,6 @@ return {
       vim.wo.conceallevel = 2
     end,
   },
+  'windwp/nvim-autopairs',
+  'roobert/tailwindcss-colorizer-cmp',
 }
