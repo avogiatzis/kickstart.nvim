@@ -618,7 +618,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        --ts_ls = {}
         --
         lua_ls = {
           -- cmd = {...},
@@ -647,15 +647,14 @@ require('lazy').setup({
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
+      local lsp_servers = require 'custom.lsp'
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = {
-          { import = 'lsp' },
-        },
+        ensure_installed = lsp_servers,
         automatic_installation = true,
         handlers = {
           function(server_name)
@@ -685,6 +684,7 @@ require('lazy').setup({
         desc = '[F]ormat buffer',
       },
     },
+    lazy = false,
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
@@ -709,7 +709,9 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -920,6 +922,26 @@ require('lazy').setup({
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
+      },
+      autotag = {
+        enable = true,
+        filetypes = {
+          'html',
+          'javascript',
+          'typescript',
+          'javascriptreact',
+          'typescriptreact',
+          'svelte',
+          'vue',
+          'tsx',
+          'jsx',
+          'rescript',
+          'css',
+          'lua',
+          'xml',
+          'php',
+          'markdown',
+        },
       },
       indent = { enable = true, disable = { 'ruby' } },
     },

@@ -2,6 +2,7 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+--
 return {
   {
     'nvim-neorg/neorg',
@@ -27,6 +28,10 @@ return {
       vim.wo.conceallevel = 2
     end,
   },
-  'windwp/nvim-autopairs',
-  'roobert/tailwindcss-colorizer-cmp',
+  { 'windwp/nvim-autopairs', lazy = false },
+  'roobert/tailwindcss-colorizer-cmp.nvim',
+  {
+    'windwp/nvim-ts-autotag',
+    lazy = false,
+  },
 }
