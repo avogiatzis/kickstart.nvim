@@ -1,4 +1,5 @@
 local lsp_servers = {
+  'rust_analyzer',
   'ts_ls',
   'cssls',
   'html',

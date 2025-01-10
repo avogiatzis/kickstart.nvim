@@ -34,4 +34,13 @@ return {
     'windwp/nvim-ts-autotag',
     lazy = false,
   },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5',
+    lazy = false,
+  },
+  {
+    'OmniSharp/omnisharp-vim',
+    lazy = false,
+  },
 }
