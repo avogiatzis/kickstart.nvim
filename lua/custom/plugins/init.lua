@@ -28,7 +28,7 @@ return {
       vim.wo.conceallevel = 2
     end,
   },
-  { 'windwp/nvim-autopairs', lazy = false },
+  -- { 'windwp/nvim-autopairs', lazy = false },
   'roobert/tailwindcss-colorizer-cmp.nvim',
   {
     'windwp/nvim-ts-autotag',
