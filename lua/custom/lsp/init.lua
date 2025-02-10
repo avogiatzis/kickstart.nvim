@@ -7,6 +7,7 @@ local lsp_servers = {
   'eslint',
   'tailwindcss',
   'pyright',
+  'dockerls',
 }
 
 return lsp_servers
