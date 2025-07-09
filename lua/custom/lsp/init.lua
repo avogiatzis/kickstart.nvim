@@ -6,6 +6,8 @@ local lsp_servers = {
   'jsonls',
   'eslint',
   'tailwindcss',
+  'pyright',
+  'dockerls',
 }
 
 return lsp_servers
