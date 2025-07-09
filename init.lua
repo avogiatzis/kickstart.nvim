@@ -385,11 +385,14 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<c-enter>'] = 'to_fuzzy_refine',
+              ['<C-d>'] = require('telescope.actions').delete_buffer,
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -471,6 +474,26 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
+      local lspconfig = require 'lspconfig'
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      -- Basedpyright configuration
+      lspconfig.basedpyright.setup {
+        capabilities = capabilities,
+        settings = {
+          basedpyright = {
+            analysis = {
+              autoImportCompletions = true,
+              completeFunctionParens = true,
+              configurationSources = { 'pyrightconfig' },
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
+        flags = {
+          debounce_text_changes = 150,
+        },
+      }
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -699,19 +722,20 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 5000,
           lsp_format = lsp_format_opt,
         }
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = { 'isort', 'black', timeout_ms = 10000 },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'jq', 'prettier' },
       },
     },
   },
